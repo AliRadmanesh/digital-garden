@@ -1,5 +1,4 @@
 import { GetStaticProps } from 'next';
-import styles from './index.module.css';
 
 export interface AboutProps {
   name: string;
@@ -7,8 +6,8 @@ export interface AboutProps {
 
 export function About({ name }: AboutProps) {
   return (
-    <div className={styles['container']}>
-      <h1>Welcome {name}!</h1>
+    <div>
+      <h1 className="text-3xl text-red-500">Welcome {name}!</h1>
     </div>
   );
 }
