@@ -18,6 +18,9 @@
       "@digital-garden/markdown": ["libs/markdown/src/index.ts"],
       "@digital-garden/shared/mdx-elements": [
         "libs/shared/mdx-elements/src/index.ts"
+      ],
+      "@digital-garden/shared/mdx-elements/*": [
+        "libs/shared/mdx-elements/src/lib/*"
       ]
     }
   },

@@ -7,12 +7,21 @@ import {
   renderMarkdown,
 } from '@digital-garden/markdown';
 import { MDXRemote } from 'next-mdx-remote';
-import { Youtube, CustomLink } from '@digital-garden/shared/mdx-elements';
+import dynamic from 'next/dynamic';
 
 const mdxElements = {
-  Youtube,
-  a: CustomLink,
+  Youtube: dynamic(
+    async () =>
+      await import('@digital-garden/shared/mdx-elements/youtube/youtube')
+  ),
+  a: dynamic(
+    async () =>
+      await import(
+        '@digital-garden/shared/mdx-elements/custom-link/custom-link'
+      )
+  ),
 };
+
 export interface ArticleProps extends ParsedUrlQuery {
   slug: string;
 }
