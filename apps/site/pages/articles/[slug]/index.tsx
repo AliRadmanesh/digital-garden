@@ -7,7 +7,11 @@ import {
   renderMarkdown,
 } from '@digital-garden/markdown';
 import { MDXRemote } from 'next-mdx-remote';
+import { Youtube } from '@digital-garden/shared/mdx-elements';
 
+const mdxElements = {
+  Youtube,
+};
 export interface ArticleProps extends ParsedUrlQuery {
   slug: string;
 }
@@ -22,7 +26,7 @@ export function Article({ frontMatter, html }) {
         <div>by {frontMatter.author.name}</div>
       </article>
       <hr />
-      <MDXRemote {...html} />
+      <MDXRemote {...html} components={mdxElements} />
     </div>
   );
 }
