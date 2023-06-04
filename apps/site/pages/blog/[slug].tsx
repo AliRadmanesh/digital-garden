@@ -7,10 +7,13 @@ import {
   getParsedFileContentBySlug,
   renderMarkdown,
 } from '@digital-garden/markdown';
+import { Youtube } from '@digital-garden/shared/mdx-elements';
 
 export interface PostProps extends ParsedUrlQuery {
   slug: string;
 }
+
+const mdxElements = { Youtube };
 
 const POSTS_PATH = join(process.cwd(), '_posts');
 
@@ -28,7 +31,7 @@ export function Post({
         <div>by {frontMatter.author.name}</div>
       </article>
       <hr />
-      <MDXRemote {...html} />
+      <MDXRemote {...html} components={mdxElements} />
     </div>
   );
 }
