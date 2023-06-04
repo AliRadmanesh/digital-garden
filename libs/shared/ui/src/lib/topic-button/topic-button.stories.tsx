@@ -1,5 +1,5 @@
-import type { Meta } from '@storybook/react';
-import { TopicButton } from './topic-button';
+import type { Meta, StoryFn } from '@storybook/react';
+import { TopicButton, TopicButtonProps } from './topic-button';
 
 const Story: Meta<typeof TopicButton> = {
   component: TopicButton,
@@ -7,6 +7,13 @@ const Story: Meta<typeof TopicButton> = {
 };
 export default Story;
 
-export const Primary = {
-  args: {},
+const Template: StoryFn<TopicButtonProps> = (args) => {
+  return (
+    <div className="bg-gray-200 p-20">
+      <TopicButton {...args} />
+    </div>
+  );
 };
+
+export const Primary = Template.bind({});
+Primary.args = {};
