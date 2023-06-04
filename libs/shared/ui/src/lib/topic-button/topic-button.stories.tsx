@@ -1,19 +1,29 @@
-import type { Meta, StoryFn } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
+import { useState } from 'react';
 import { TopicButton, TopicButtonProps } from './topic-button';
 
-const Story: Meta<typeof TopicButton> = {
+export default {
   component: TopicButton,
   title: 'TopicButton',
-};
-export default Story;
+  argTypes: {
+    onClick: { action: 'onClick executed' },
+  },
+} as Meta;
 
 const Template: StoryFn<TopicButtonProps> = (args) => {
+  const [clickedTopic, setClickedTopic] = useState<string | null>(null);
   return (
-    <div className="bg-gray-200 p-20">
-      <TopicButton {...args} />
+    <div className="bg-gray-300 p-20">
+      <TopicButton
+        {...args}
+        onClick={(topicName) => setClickedTopic(topicName)}
+      />
+      {clickedTopic && <div>Button has been clicked: {clickedTopic}</div>}
     </div>
   );
 };
 
 export const Primary = Template.bind({});
-Primary.args = {};
+Primary.args = {
+  topicName: 'Next.js',
+};
