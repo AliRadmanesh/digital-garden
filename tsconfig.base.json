@@ -21,7 +21,8 @@
       ],
       "@digital-garden/shared/mdx-elements/*": [
         "libs/shared/mdx-elements/src/lib/*"
-      ]
+      ],
+      "@digital-garden/shared/ui": ["libs/shared/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
