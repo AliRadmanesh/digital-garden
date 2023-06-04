@@ -26,7 +26,10 @@ const mdxElements = {
   ),
 };
 
-const POSTS_PATH = join(process.cwd(), '_posts');
+const POSTS_PATH = join(
+  process.cwd(),
+  process.env.articleMarkdownPath || '_posts'
+);
 
 export function Post({
   frontMatter,
