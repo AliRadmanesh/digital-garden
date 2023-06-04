@@ -7,13 +7,24 @@ import {
   getParsedFileContentBySlug,
   renderMarkdown,
 } from '@digital-garden/markdown';
-import { Youtube, CustomLink } from '@digital-garden/shared/mdx-elements';
+import dynamic from 'next/dynamic';
 
 export interface PostProps extends ParsedUrlQuery {
   slug: string;
 }
 
-const mdxElements = { Youtube, a: CustomLink };
+const mdxElements = {
+  Youtube: dynamic(
+    async () =>
+      await import('@digital-garden/shared/mdx-elements/youtube/youtube')
+  ),
+  a: dynamic(
+    async () =>
+      await import(
+        '@digital-garden/shared/mdx-elements/custom-link/custom-link'
+      )
+  ),
+};
 
 const POSTS_PATH = join(process.cwd(), '_posts');
 
