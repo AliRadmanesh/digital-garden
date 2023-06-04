@@ -7,13 +7,13 @@ import {
   getParsedFileContentBySlug,
   renderMarkdown,
 } from '@digital-garden/markdown';
-import { Youtube } from '@digital-garden/shared/mdx-elements';
+import { Youtube, CustomLink } from '@digital-garden/shared/mdx-elements';
 
 export interface PostProps extends ParsedUrlQuery {
   slug: string;
 }
 
-const mdxElements = { Youtube };
+const mdxElements = { Youtube, a: CustomLink };
 
 const POSTS_PATH = join(process.cwd(), '_posts');
 
