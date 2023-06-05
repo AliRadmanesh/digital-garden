@@ -1,13 +1,13 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import dynamic from 'next/dynamic';
+import { GetStaticPaths, InferGetStaticPropsType } from 'next';
 import { readdirSync } from 'fs';
 import { join } from 'path';
 import { ParsedUrlQuery } from 'querystring';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { MDXRemote } from 'next-mdx-remote';
 import {
   getParsedFileContentBySlug,
   renderMarkdown,
 } from '@digital-garden/markdown';
-import dynamic from 'next/dynamic';
 
 export interface PostProps extends ParsedUrlQuery {
   slug: string;
@@ -34,10 +34,7 @@ const POSTS_PATH = join(
 export function Post({
   frontMatter,
   html,
-}: {
-  frontMatter: { title: string; author: { name: string } };
-  html: MDXRemoteSerializeResult;
-}) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div className="m-6">
       <article className="prose prose-lg">
@@ -50,19 +47,14 @@ export function Post({
   );
 }
 
-// TODO: fix the type-checking
-export const getStaticProps: GetStaticProps<PostProps> = async ({
-  params,
-}: {
-  params: PostProps;
-}) => {
-  // 1. parse the content of our markdown and separate it into frontmatter and content
+export const getStaticProps = async ({ params }: { params: PostProps }) => {
+  // Parse the content of our markdown and separate it into frontmatter and content
   const articleMarkdownContent = getParsedFileContentBySlug(
     params.slug,
     POSTS_PATH
   );
 
-  // 2. convert markdown content => HTML
+  // Convert markdown content => HTML
   const renderHTML = await renderMarkdown(articleMarkdownContent.content);
 
   return {
